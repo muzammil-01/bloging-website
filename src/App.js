@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+
+// Import all pages
+import './App.css'
+import AllBlogs from './pages/allblogs/Blogs'
+import Blog from './pages/blog/Blog'
+import Dashboard from './pages/dashboard/Dashboard'
+import CreatePost from './pages/createpost/CreatePost';
+import Login from './pages/login/Login'
+import Signup from './pages/signup/Signup'
+import About from './pages/about/About'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import Sidebar from './components/Sidebar'
+import { useCollection } from './hooks/useCollection';
+
+
+import { useAuthContext } from './hooks/useAuthContext'
 
 function App() {
+  const {document} = useCollection('blogs')
+  const { user } = useAuthContext()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+      {user && <Sidebar/>}
+      <div className="container">
+      <Navbar/>
+        <Routes>
+          <Route path='/' element={<AllBlogs />} />
+          <Route path='about' element={<About />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/create' element={<CreatePost />} />
+          <Route path='/blog/:id' element={<Blog />} />
+        </Routes>
+      <Footer/>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }

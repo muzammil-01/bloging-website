@@ -1,0 +1,25 @@
+.all{
+    text-align: center;
+    margin-top: 100px;
+    font-size: xx-large;
+}
+.back{
+    text-align: center;
+}
+.back img{
+    width: 50%;
+    margin-top: 70px;
+}
+.back h1{
+     margin-top: 20px;
+}
+
+.back p{
+    margin-bottom: 20px;
+    text-align: center;
+}
+.back hr{
+    width: 50vw;
+    margin: 0 auto;
+    border: 1px solid;
+}

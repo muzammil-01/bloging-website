@@ -1,0 +1,47 @@
+.dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+    justify-content: space-around;
+    grid-gap: 20px;
+    width: 50%;
+    margin: 5rem auto;
+  }
+.dashboard-item {
+    position: relative;
+}
+
+.delete {
+    position: absolute;
+    top: 50px;
+    left: 280px;
+    font-size: x-large;
+    color: black;
+    background-color: white;
+    border-radius: 50%;
+    padding: 6px;
+    z-index: 1;
+  }
+.dashboard-card{
+    margin-top: 40px;
+    font-family: 'Montserrat', sans-serif;
+}
+.dashboard-card a {
+    padding: 16px;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+.dashboard-card img{
+    display: flex;
+    margin: 0 auto;
+    width: 100%;
+    height: 80%;
+}
+.dashboard-content{
+    text-align: center;
+    margin-top: 20px;
+}
+@media only screen and (max-width:769px){
+    .dashboard-container {
+        grid-template-columns: repeat(1, minmax(320px,  1fr));
+    }
+}

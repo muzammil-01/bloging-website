@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500&display=swap');
+.card{
+    margin-top: 40px;
+    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    font-family: 'Montserrat', sans-serif;
+}
+.card a {
+    padding: 16px;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+.card img{
+    display: flex;
+    margin: 0 auto;
+    width: 100%;
+    height: 80%;
+}
+.content{
+    text-align: center;
+    margin-top: 20px;
+}
+.cont{
+    margin: 0px 200px 0px 200px;
+}
+@media only screen and (max-width:769px){
+    .card{
+        grid-template-columns: repeat(1, minmax(320px,  1fr));
+    }
+}
