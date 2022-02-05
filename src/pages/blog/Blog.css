@@ -25,6 +25,18 @@
     flex-wrap: wrap;
     align-items: center;
   }
+  .bios{
+    display: grid;
+  }
+  .bios-img{
+   grid-column: 1/2;
+  }
+   .bios-content{
+    grid-column: 2/4;
+    justify-content: start;
+    /* width: 50%; */
+    /* align-items: center; */
+   }
   .undercover{
     width: 50%;
     flex-grow: 2;

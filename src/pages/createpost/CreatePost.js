@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Select from 'react-select'
 import { useCollection } from '../../hooks/useCollection'
+import {useDocument} from '../../hooks/useDocument'
 import { useFirestore } from '../../hooks/useFirestore.js';
 import { projectStorage } from '../../firebase/config';
 
@@ -24,9 +25,11 @@ const CreatePost = () => {
   const [content, setContent] = useState('')
   const [formError, setFormError] = useState(null)
   const { user } = useAuthContext()
+  const {document} = useDocument('users', user.uid)
   const navigate = useNavigate()
   const [attachment, setAttachment] = useState('')
   const [attachmentError, setAttachmentError] = useState(null)
+  console.log(user);
 
 
 
@@ -42,6 +45,7 @@ const CreatePost = () => {
       displayName: user.displayName,
       photoURL: user.photoURL,
       id: user.uid,
+      about: document.aboutYourself
     }
 
     const uploadPath = `thumbnails/${user.uid}/${attachment.name}`

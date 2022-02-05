@@ -3,10 +3,12 @@ import './Blogs.css'
 import { useCollection } from '../../hooks/useCollection';
 import AllBlogs from '../../components/AllBlogs'
 import Background from '../../assets/background.JPG'
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function Blogs() {
+  const {users} = useAuthContext()
   const {documents, error} = useCollection('blogs')
-  console.log(documents);
+  console.log(users);
   return (
     <>
     <div className='back'>

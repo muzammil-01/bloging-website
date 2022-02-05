@@ -1,8 +1,8 @@
 import './Blog.css'
 import 'react-icons'
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom"
-import {useCollection} from '../../hooks/useCollection'
+import { useCollection } from '../../hooks/useCollection'
 import { useState } from 'react';
 import Avatar from "../../components/Avatar"
 import { BsFacebook, BsTwitter } from 'react-icons/bs';
@@ -15,14 +15,26 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 
 
 export default function BlogSummary({ blog }) {
-  const { id } = useParams()
   const { user } = useAuthContext()
-  const [show,setShow]=useState(false)
-  const { document, error } = useDocument('blogs', id)
-  const { updateDocument, response } = useFirestore('blogs')
-    
-    
-  
+  const { id } = useParams()
+  const [show, setShow] = useState(false)
+  const [like, setLike] = useState(false)
+  const { documents, error } = useDocument('blogs', id)
+  const { updateDocument, response } = useFirestore('blogs');
+  console.log(document);
+
+
+  const handleLike = (id, likes) => {
+    if (!like) {
+
+      updateDocument(id, { likes: likes + 1 })
+    }
+    if (like) {
+      console.log("disliked")
+      updateDocument(id, { likes: likes - 1 })
+    }
+  }
+
 
   return (
     <div>
@@ -43,18 +55,23 @@ export default function BlogSummary({ blog }) {
           <p>{blog.content}</p>
           <div className='btn'>
             <button
-              className='like'><AiFillLike />Like</button>
-            <button className='comment' onClick={()=>setShow(!show)}>Comment</button>
+              className='like' onClick={() => { if (user) { setLike(!like); handleLike(id, blog.likes) }; if (!user) { alert('please login') } }}>{blog.likes}<AiFillLike />Like</button>
+            <button className='comment' onClick={() => setShow(!show)}>Comment</button>
           </div>
         </div>
 
         {show && <BlogComment blog={blog} />}
         <p className='tags'>Tags: {blog.tag}</p>
-        <hr />
-        <div>
-          <Avatar src={blog.createdBy.photoURL} />
-          <strong> {blog.createdBy.displayName} </strong>
-        </div>
+        <hr/>
+          <div className="bios">
+            <div className="bios-image">
+              <Avatar src={blog.createdBy.photoURL}/>
+            </div>
+            <div className="bios-content">
+            <strong>{blog.createdBy.displayName} </strong> 
+           {blog.createdBy.about}
+            </div>
+          </div>
       </div>
     </div>
   );
